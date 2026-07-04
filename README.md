@@ -2,25 +2,96 @@
 
 Семантический поиск + граф знаний + LLM + веб-поиск + Crossref
 
-## 🎯 Демо
+---
+
+## 🎯 Демо (для экспертов)
 **Работает на время хакатона:**  
-[https://norbert.cloudpub.ru](https://norbert.cloudpub.ru)
+👉 [https://norbert.cloudpub.ru](https://norbert.cloudpub.ru)
+
+Это **главный способ** оценить систему — без установки, без скачивания данных.  
+Просто перейдите по ссылке и задайте любой вопрос по горно-металлургической тематике.
 
 ---
 
-## 📦 Что входит
-- **FastAPI** — бэкенд
-- **Streamlit** — интерфейс
-- **Neo4j** — граф знаний
-- **Elasticsearch** — полнотекстовый поиск
-- **GitHub Models (DeepSeek-R1)** — LLM
-- **DuckDuckGo + Crossref** — веб-поиск
+## 📦 Что в этом репозитории
+
+- **Исходный код** всего пайплайна (извлечение, чанкинг, NLP, граф, поиск, LLM, веб-поиск).
+- **Конфигурация** и инструкции по локальному запуску.
+- **Примеры запросов** и архитектура решения.
 
 ---
 
-## 🚀 Быстрый запуск (локально)
+## ⚠️ Важно о данных
 
-### 1. Клонируйте репозиторий
-```bash
-git clone https://github.com/ваш-логин/norbert-ai.git
-cd norbert-ai
+**Полный датасет (5 ГБ документов) НЕ включён в репозиторий** из-за ограничений по размеру.
+
+- Без данных локальный запуск **не сможет** ответить на вопросы (Elasticsearch и Neo4j будут пусты).
+- **Единственный способ** сразу увидеть работу системы — использовать **онлайн-демо** по ссылке выше.
+
+Если вы хотите **воспроизвести пайплайн с нуля** на своих данных, следуйте инструкциям ниже.
+
+---
+
+## 🚀 Локальный запуск (для разработчиков)
+
+### 1. Подготовка данных (если у вас есть свои документы)
+Поместите PDF/DOCX/TXT файлы в папку `data/raw/`.
+
+### 2. Установка зависимостей
+
+pip install -r requirements.txt
+
+3. Запуск баз данных (Neo4j + Elasticsearch)
+bash
+
+docker-compose up -d
+
+4. Настройка переменных окружения
+
+Скопируйте .env.example в .env и заполните:
+
+    GITHUB_TOKEN — Personal Access Token с правами models:read (для доступа к DeepSeek-R1 через GitHub Models)
+
+    OPENALEX_EMAIL — ваш email для Crossref (Polite mode)
+
+5. Обработка данных (занимает ~1–2 часа для 977 документов)
+bash
+
+python extract_text.py      # извлечение текста
+python chunking.py          # разбивка на чанки
+python nlp_pipeline.py      # извлечение правил + LLM (DeepSeek-R1)
+
+6. Построение графа и индексов
+bash
+
+python build_graph.py       # загрузка в Neo4j
+python index_elastic.py     # индексация в Elasticsearch
+
+7. Запуск API и интерфейса
+
+Терминал 1:
+bash
+
+uvicorn api:app --host 0.0.0.0 --port 8000
+
+Терминал 2:
+bash
+
+streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+
+8. Открыть в браузере
+
+http://localhost:8501
+📊 Технический стек
+
+    Python, FastAPI, Streamlit
+
+    Neo4j (графовая БД)
+
+    Elasticsearch (поисковый движок)
+
+    GitHub Models (DeepSeek-R1)
+
+    DuckDuckGo + Crossref (веб-поиск)
+
+    Docker (контейнеризация)
