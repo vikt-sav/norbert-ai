@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+lib/
+Lib/
+.venv
+
+# Данные (большие папки)
+data/
+output/
+chroma_db/
+
+# Секреты
+.env
+
+# Сгенерированные файлы
+graph.html
+*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,57 @@
+{
+  "materials": {
+    "никель": "nickel",
+    "медь": "copper",
+    "сульфаты": "sulfate",
+    "хлориды": "chloride",
+    "гипс": "gypsum",
+    "католит": "catholyte",
+    "электролит": "electrolyte",
+    "алмаз": "diamond",
+    "золото": "gold",
+    "железная руда": "iron ore",
+    "свинец": "lead",
+    "цинк": "zinc"
+  },
+  "processes": {
+    "электроэкстракция": "electrowinning",
+    "выщелачивание": "leaching",
+    "обогащение": "beneficiation",
+    "флотация": "flotation",
+    "измельчение": "grinding",
+    "обесcоливание": "desalination",
+    "кучное выщелачивание": "heap leaching",
+    "подземная разработка": "underground mining",
+    "открытая разработка": "open pit mining",
+    "взрывные работы": "blasting",
+    "циркуляция католита": "catholyte circulation"
+  },
+  "equipment": {
+    "мельница": "mill",
+    "флотационная машина": "flotation machine",
+    "печь взвешенной плавки": "fluidized bed furnace",
+    "ванна электроэкстракции": "electrowinning cell",
+    "сепаратор": "separator",
+    "дренажный комплекс": "drainage system"
+  },
+  "units": {
+    "мг/л": "mg/l",
+    "г/л": "g/l",
+    "°С": "C",
+    "м/с": "m/s",
+    "мм": "mm",
+    "т/сут": "t/day",
+    "кВт·ч": "kWh",
+    "%": "percent",
+    "м": "m",
+    "кг": "kg",
+    "т": "t",
+    "л": "l",
+    "м³": "m3",
+    "ч": "h",
+    "мин": "min",
+    "руб": "rub",
+    "USD": "USD",
+    "€": "EUR"
+  }
+}
